@@ -1,0 +1,14 @@
+Package: travisci
+Type: Package
+Title: Travis-CI API Client Package
+Version: 0.1.1
+Date: 2015-10-20
+Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
+                    email = "thosjleeper@gmail.com"))
+Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
+Description: A simple client for the Travis-CI <https://travis-ci.org/> REST API.
+License: GPL (>= 2)
+URL: https://github.com/cloudyr/travisci
+BugReports: https://github.com/cloudyr/travisci/issues
+Imports: httr, jsonlite
+Suggests: testthat

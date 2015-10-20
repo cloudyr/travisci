@@ -1,0 +1,52 @@
+# Travis-CI API Client Package #
+
+**travisci** is a simple client package for the [Travis-CI](http://travis-ci.org/) [REST API](http://docs.travis-ci.com/api/#overview). It can control containerized builds of R packages and other software projects as part of a continuous integration workflow.
+
+## Installation ##
+
+[![CRAN](http://www.r-pkg.org/badges/version/travisci)](http://cran.r-project.org/package=travisci)
+[![Build Status](https://travis-ci.org/cloudyr/travisci.png?branch=master)](https://travis-ci.org/cloudyr/travisci) [![codecov.io](http://codecov.io/github/cloudyr/travisci/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/travisci?branch=master)
+
+This package is not yet on CRAN. To install the latest development version from GitHub, run the following:
+
+```R
+if(!require("devtools")){
+    install.packages("devtools")
+    library("devtools")
+}
+install_github("cloudyr/travisci")
+```
+
+## Code Examples ##
+
+To use the Travis-CI API, you will need a Github account and an authentication key. That authentication key will be used temporarily by the Travis-CI API to generate a further access key that will authenticate subsequent API requests. To do this, you'll need to store a GitHub token in the `GITHUB_TOKEN` environment variable. **travisci** then uses this to populate a `TRAVIS_CI_TOKEN` environment variable, which will be used for subsequent authentications.
+
+To obtain a GitHub token, you can do the following, replacing "username" and "password" with your GitHub login details:
+
+```R
+auth_travis("username", "password")
+
+# or, if you already have a GitHub token stored:
+auth_travis()
+```
+
+A token can also be created [via the browser](https://github.com/settings/tokens). `auth_travis()` will, as a side effect, store the Travis-CI token received into the `TRAVIS_CI_TOKEN` environment variable.
+
+
+More coming soon...
+
+
+### Getting repos and branches ###
+
+
+### Cancel and restart builds ###
+
+
+### Settings and environment variables ###
+
+
+
+
+
+---
+[![cloudyr project logo](http://i.imgur.com/JHS98Y7.png)](https://github.com/cloudyr)
