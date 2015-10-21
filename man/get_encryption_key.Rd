@@ -21,7 +21,19 @@ A list.
 Retrieve and refresh the public key used for encryption.
 }
 \details{
-These functions retrieve and refresh the public key used for encrypting secure environment variables for the Travis-CI build environment. This is probably more easily handled using the travis command-line tools, but it is also an implemented feature of the API and the functionality may be expanded in the future. See href{http://docs.travis-ci.com/user/encryption-keys/}{the API documentation} for full details.
+These functions retrieve and refresh the public key used for encrypting secure environment variables for the Travis-CI build environment. This is probably more easily handled using the travis command-line tools, but it is also an implemented feature of the API and the functionality may be expanded in the future. See href{http://docs.travis-ci.com/user/encryption-keys/}{the API documentation} for full details. \code{get_encryption_key} retrieves the current, repository-specific public key. \code{set_encryption_key} resets the key and returns its value.
+}
+\examples{
+\dontrun{
+# authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+auth_travis()
+
+# get current public key
+get_encryption_key("cloudyr/travisci")
+
+# reset public key and retrieve the new value
+set_encryption_key("cloudyr/travisci")
+}
 }
 \seealso{
 \code{\link{get_env_vars}}

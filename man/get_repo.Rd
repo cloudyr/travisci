@@ -22,6 +22,9 @@ This retrieves a list of details about a given repository.
 }
 \examples{
 \dontrun{
+# authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+auth_travis()
+
 # get a repo
 get_repo(repo = "cloudyr/travisci")
 

@@ -24,6 +24,9 @@ This can retrieve a list of recent branches for a given repo, or if \code{branch
 }
 \examples{
 \dontrun{
+# authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+auth_travis()
+
 # get branches for a given repo
 get_branch(repo = "cloudyr/travisci")
 

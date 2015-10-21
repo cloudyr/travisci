@@ -7,6 +7,9 @@
 #' @seealso \code{\link{get_builds}}
 #' @examples
 #' \dontrun{
+#' # authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+#' auth_travis()
+#'
 #' # get a repo
 #' get_repo(repo = "cloudyr/travisci")
 #'
@@ -32,6 +35,9 @@ get_repo <- function(repo, ...) {
 #' @seealso \code{\link{get_builds}}
 #' @examples
 #' \dontrun{
+#' # authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+#' auth_travis()
+#'
 #' # get branches for a given repo
 #' get_branch(repo = "cloudyr/travisci")
 #'
@@ -59,6 +65,9 @@ get_branch <- function(repo, branch, ...) {
 #' @seealso \code{\link{get_builds}}
 #' @examples
 #' \dontrun{
+#' # authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+#' auth_travis()
+#'
 #' # get settings
 #' get_repo_settings(repo = "cloudyr/travisci")
 #'

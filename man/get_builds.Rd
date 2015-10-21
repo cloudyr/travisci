@@ -24,6 +24,9 @@ This can retrieve a list of recent builds (across all repos), recent builds for 
 }
 \examples{
 \dontrun{
+# authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+auth_travis()
+
 # get all recent builds
 g <- get_builds()
 

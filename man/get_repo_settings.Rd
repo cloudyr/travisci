@@ -27,6 +27,9 @@ Get or set repository settings
 }
 \examples{
 \dontrun{
+# authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+auth_travis()
+
 # get settings
 get_repo_settings(repo = "cloudyr/travisci")
 

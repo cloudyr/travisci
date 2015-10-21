@@ -33,7 +33,29 @@ These functions retrieve and modify environment variables for the Travis-CI buil
 \details{
 This can be useful for checking, creating, updating, or deleting environment variables used as build settings. See href{http://docs.travis-ci.com/user/environment-variables/}{the API documentation} for full details.
 }
+\examples{
+\dontrun{
+# authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+auth_travis()
+
+# get environment variables for a repo
+get_env_vars("cloudyr/travisci")
+
+# get a specific environment variable based on its ID
+get_env_vars("cloudyr/travisci", id = 12345)
+
+# set environment variables
+e <- add_env_vars("cloudyr/travisci", var = list(VAR1 = "value1", VAR2 = "value2"))
+
+# update an environment variable
+update_env_vars("cloudyr/travisci", id = 12345, var = list(VAR1 = "newvalue")
+
+# delete an environment variable
+delete_env_vars("cloudyr/travisci", id = 12345)
+
+}
+}
 \seealso{
-\code{\link{get_encryption_key}}
+\code{\link{get_encryption_key}}, for handling encrypted environment variables
 }
 

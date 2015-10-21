@@ -8,6 +8,9 @@
 #' @seealso \code{\link{cancel_build}}, \code{\link{restart_build}}
 #' @examples
 #' \dontrun{
+#' # authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+#' auth_travis()
+#'
 #' # get all recent builds
 #' g <- get_builds()
 #' 
@@ -41,6 +44,9 @@ get_builds <- function(repo, build, ...) {
 #' @seealso \code{\link{get_builds}}
 #' @examples
 #' \dontrun{
+#' # authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+#' auth_travis()
+#'
 #' # get all recent builds for this repo
 #' g <- get_builds(repo = "cloudyr/travisci")
 #' 

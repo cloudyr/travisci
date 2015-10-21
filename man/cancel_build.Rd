@@ -25,6 +25,9 @@ Cancel and restart Travis-CI builds
 }
 \examples{
 \dontrun{
+# authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+auth_travis()
+
 # get all recent builds for this repo
 g <- get_builds(repo = "cloudyr/travisci")
 
