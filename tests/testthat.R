@@ -1,4 +1,4 @@
 library("testthat")
 library("travisci")
 
-#test_check("travisci")
+test_check("travisci")
