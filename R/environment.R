@@ -2,7 +2,7 @@
 #' @description These functions retrieve and modify environment variables for the Travis-CI build environment, as a possible alternative to specifying them in a \samp{.travis.yml} file.
 #' @details This can be useful for checking, creating, updating, or deleting environment variables used as build settings. See href{http://docs.travis-ci.com/user/environment-variables/}{the API documentation} for full details.
 #' @param repo A character string specifying a repo slug (i.e., \samp{cloudyr/travisci}) or a numeric Travis-CI repository ID. If a slug is used, it will be implicitly converted to a repository ID in some cases where only the latter is accepted.
-#' @param id A numeric ID for a given environment variable, for example as returned by this function with this argument missing.
+#' @param id An alphanumeric ID for a given environment variable, for example as returned by this function with this argument missing.
 #' @param var A list of environment variables as key-value pairs.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.
@@ -22,10 +22,11 @@
 #' e <- add_env_vars("cloudyr/travisci", var = list(VAR1 = "value1", VAR2 = "value2"))
 #'
 #' # update an environment variable
-#' update_env_vars("cloudyr/travisci", id = 12345, var = list(VAR1 = "newvalue")
+#' update_env_vars("cloudyr/travisci", id = e$id, 
+#'                  var = list(VAR1 = "newvalue")
 #' 
 #' # delete an environment variable
-#' delete_env_vars("cloudyr/travisci", id = 12345)
+#' delete_env_vars("cloudyr/travisci", id = e$id)
 #' 
 #' }
 #' @export

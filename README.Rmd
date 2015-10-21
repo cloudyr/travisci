@@ -38,13 +38,34 @@ More coming soon...
 
 ### Getting repos and branches ###
 
+```{r}
+get_repo("cloudyr/travisci")
+get_branch("cloudyr/travis", "master")
+```
 
 ### Cancel and restart builds ###
 
+```{r}
+b <- get_builds("cloudyr/travisci")
+
+# cancel
+cancel_build(b[[1]]$id)
+
+# restart
+restart_build(b[[1]]$id)
+```
 
 ### Settings and environment variables ###
 
+```{r}
+get_env_vars("cloudyr/travisci")
 
+# set new environment variables
+e <- add_env_vars("cloudyr/travisci", var = list(VAR1 = "value1", VAR2 = "value2"))
+
+# delete those environment variables
+delete_env_vars("cloudyr/travisci", id = e[[1]]$id)
+```
 
 
 

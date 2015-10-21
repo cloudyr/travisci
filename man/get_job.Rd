@@ -41,4 +41,7 @@ cancel_job("12345")
 restart_job("1235")
 }
 }
+\seealso{
+\code{\link{get_annotations}}, \code{\link{get_logs}}
+}
 

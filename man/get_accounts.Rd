@@ -27,4 +27,7 @@ auth_travis()
 get_accounts()
 }
 }
+\seealso{
+\code{\link{get_users}}, \code{\link{get_permissions}}
+}
 

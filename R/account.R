@@ -1,3 +1,21 @@
+#' @title Get Broadcasts
+#' @description Retrieve Travis-CI broadcasts
+#' @details This is not particularly useful from an R perspective, but it will retrieve \dQuote{broadcasts} or news from Travis-CI.
+#' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
+#' @return A list.
+#' @examples
+#' \dontrun{
+#' # authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+#' auth_travis()
+#'
+#' # get broadcasts
+#' get_broadcasts()
+#' }
+#' @export
+get_broadcasts <- function(...) {
+    travisHTTP("GET", path = "/broadcasts")
+}
+
 #' @title Get Travis Accounts
 #' @description Retrieve GitHub accounts linked to the authenticated Travis user.
 #' @details This is probably the closest thing to a \dQuote{Hello World!} on the API. It provides information about what accounts have been linked between GitHub and Travis, such as organization accounts that the user is a member of.
@@ -11,10 +29,31 @@
 #' # get travis accounts
 #' get_accounts()
 #' }
+#' @seealso \code{\link{get_users}}, \code{\link{get_permissions}}
 #' @export
 get_accounts <- function(...) {
     travisHTTP("GET", path = "/accounts", ...)
 }
+
+#' @title Get GitHub Permissions
+#' @description Retrieve GitHub permissions that have been authorized to Travis-CI.
+#' @details This can be useful for checking what access rights have been granted to Travis-CI by GitHub. If for some reason Travis-CI isn't working, this might be useful for troubleshooting but probably not otherwise.
+#' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
+#' @return A list.
+#' @examples
+#' \dontrun{
+#' # authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
+#' auth_travis()
+#'
+#' # get travis accounts
+#' get_permissions()
+#' }
+#' @seealso \code{\link{get_accounts}}, \code{\link{get_users}}, \code{\link{get_requests}} (to troubleshoot specific code pushes)
+#' @export
+get_permissions <- function(...) {
+    travisHTTP("GET", path = "/users/permissions", ...)
+}
+
 
 #' @title Travis CI Users
 #' @description Retrieve and sync Travis CI users
@@ -36,6 +75,7 @@ get_accounts <- function(...) {
 #' # get specific user
 #' get_user("userid")
 #' }
+#' @seealso \code{\link{get_accounts}}, \code{\link{get_permissions}}
 #' @export
 get_users <- function(user, ...) {
     if (!missing(user)) {

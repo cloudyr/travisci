@@ -38,4 +38,7 @@ get_users()
 get_user("userid")
 }
 }
+\seealso{
+\code{\link{get_accounts}}, \code{\link{get_permissions}}
+}
 
