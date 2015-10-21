@@ -18,7 +18,7 @@ delete_env_vars(repo, id, ...)
 \arguments{
 \item{repo}{A character string specifying a repo slug (i.e., \samp{cloudyr/travisci}) or a numeric Travis-CI repository ID. If a slug is used, it will be implicitly converted to a repository ID in some cases where only the latter is accepted.}
 
-\item{id}{A numeric ID for a given environment variable, for example as returned by this function with this argument missing.}
+\item{id}{An alphanumeric ID for a given environment variable, for example as returned by this function with this argument missing.}
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 
@@ -48,10 +48,11 @@ get_env_vars("cloudyr/travisci", id = 12345)
 e <- add_env_vars("cloudyr/travisci", var = list(VAR1 = "value1", VAR2 = "value2"))
 
 # update an environment variable
-update_env_vars("cloudyr/travisci", id = 12345, var = list(VAR1 = "newvalue")
+update_env_vars("cloudyr/travisci", id = e$id,
+                 var = list(VAR1 = "newvalue")
 
 # delete an environment variable
-delete_env_vars("cloudyr/travisci", id = 12345)
+delete_env_vars("cloudyr/travisci", id = e$id)
 
 }
 }

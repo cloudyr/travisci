@@ -1,3 +1,30 @@
+#' @title Travis-CI API Client
+#' @description This package provides functionality for interacting with the Travis-CI API. Travis-CI is a continuous integration service that allows for automated testing of software each time that software is publicly committed to a repository on GitHub. Setting up Travis-CI is quite simple, requiring only a GitHub account, some public (or private) repository hosted on GitHub, and logging into to Travis to link it to that repository. Travis-CI provides \href{http://docs.travis-ci.com/user/languages/r/}{straightforward documentation} for configuring your repository to interact with Travis via a \samp{.travis.yml} file added to your repository.
+#'
+#' Once you have your Travis-CI account configured online, you can use this package to interact with and perform all operations on your Travis builds that you would normally perform by the Travis website. This includes monitoring builds, modifying build environment settings and environment variables, and cancelling or restarting builds.
+#'
+#' Before you can use the package, you need to authenticate against the Travis-CI API using \code{\link{auth_travis}}, using your GitHub username and password, a GitHub personal access token, or a previously generated Travis API token (see examples, below).
+#'
+#' @examples
+#' \dontrun{
+#' # authenticate using your GitHub login credentials
+#' auth_travis("username", "password")
+#' 
+#' # authenticate using a GitHub token explicitly
+#' auth_travis(gh_token = "githubtokenvalue")
+#'
+#' # authenticate using a stored environment variables
+#' Sys.setenv("GITHUB_TOKEN" = "githubtokenvalue")
+#' 
+#' # check to see if you've authenticated correctly
+#' get_accounts()
+#' }
+#'
+#' @docType package
+#' @seealso \code{\link{auth_travis}}, \code{\link{get_accounts}}, \code{\link{get_repo}}
+#' @name travisci
+NULL
+
 #' @title Get Broadcasts
 #' @description Retrieve Travis-CI broadcasts
 #' @details This is not particularly useful from an R perspective, but it will retrieve \dQuote{broadcasts} or news from Travis-CI.

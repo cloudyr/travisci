@@ -1,6 +1,6 @@
 # Travis-CI API Client Package #
 
-**travisci** is a simple client package for the [Travis-CI](http://travis-ci.org/) [REST API](http://docs.travis-ci.com/api/#overview). It can control containerized builds of R packages and other software projects as part of a continuous integration workflow.
+**travisci** is a simple client package for the [Travis-CI](http://travis-ci.org/) [REST API](http://docs.travis-ci.com/api/#overview). It can control containerized builds of R packages and other software projects as part of a continuous integration workflow. To learn more about developing R packages with Travis, see [the Travis documentation for R](http://docs.travis-ci.com/user/languages/r/).
 
 ## Installation ##
 
