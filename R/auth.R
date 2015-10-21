@@ -54,4 +54,3 @@ function(username,
     }
     return(invisible(travis_token))
 }
-

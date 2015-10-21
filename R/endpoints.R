@@ -1,6 +1,26 @@
+#' @title Get Travis Accounts
+#' @description Retrieve GitHub accounts linked to the authenticated Travis user.
+#' @details This is probably the closest thing to a \dQuote{Hello World!} on the API. It provides information about what accounts have been linked between GitHub and Travis, such as organization accounts that the user is a member of.
+#' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
+#' @return A list.
+#' @export
 get_accounts <- function(...) {
     travisHTTP("GET", path = "/accounts", ...)
 }
+
+get_users <- function(user, ...) {
+    if (!missing(user)) {
+        travisHTTP("GET", path = paste0("/users/", user), ...)
+    } else {
+        travisHTTP("GET", path = paste0("/users"), ...)
+    }
+}
+
+sync_users <- function(...) {
+    travisHTTP("POST", path = paste0("/users/sync"), ...)
+}
+
+
 
 get_annotations <- function(job, ...) {
     travisHTTP("GET", path = paste0("/jobs/", job, "/annotations"), ...)
@@ -10,38 +30,10 @@ create_annotation <- function(job, ...) {
     travisHTTP("GET", path = paste0("/jobs/", job, "/annotations"), ...)
 }
 
-get_branch <- function(repo, branch, ...) {
-    if (!missing(branch)) {
-        travisHTTP("GET", path = paste0("/repos/", repo, "/branches"), ...)
-    } else {
-        travisHTTP("GET", path = paste0("/repos/", repo, "/branches/", branch), ...)
-    }
-    
-}
-
 get_broadcasts <- function(...) {
     travisHTTP("GET", path = "/broadcasts")
 }
 
-get_builds <- function(repo, build, ...) {
-    if (!missing(repo) & !missing(build)) {
-        travisHTTP("GET", path = paste0("/repos/", repo, "/builds/", build), ...)
-    } else if(!missing(repo)) {
-        travisHTTP("GET", path = paste0("/repos/", repo, "/builds"), ...)
-    } else if(!missing(build)) {
-        travisHTTP("GET", path = paste0("/builds/", build), ...)
-    } else {
-        travisHTTP("GET", path = "/builds", ...)
-    }
-}
-
-cancel_build <- function(build, ...) {
-    travisHTTP("POST", path = paste0("/builds/", build, "/cancel"), ...)
-}
-
-restart_build <- function(build, ...) {
-    travisHTTP("POST", path = paste0("/builds/", build, "/restart"), ...)
-}
 
 
 get_caches <- function(repo, ...) {
@@ -92,11 +84,6 @@ get_permissions <- function(...) {
 }
 
 
-get_repo <- function(repo, ...) {
-    structure(travisHTTP("GET", path = paste0("/repos/", repo), ...)$repo, class = "travis_repo")
-}
-
-
 get_requests <- function(request, ...) {
     if (missing(request)) {
         travisHTTP("GET", path = paste0("/requests"), ...)
@@ -105,31 +92,5 @@ get_requests <- function(request, ...) {
     }
 }
 
-get_repo_settings <- function(repo, ...) {
-    travisHTTP("GET", path = paste0("/repos/", repo, "/settings"), ...)
-}
-
-set_repo_settings <- function(repo, settings = list(), ...) {
-    # builds_only_with_travis_yml
-    # build_pushes
-    # build_pull_requests
-    # maximum_number_of_builds
-    travisHTTP("PATCH", path = paste0("/repos/", repo, "/settings"), 
-               body = list(settings = settings), encode = "json", ...)
-}
-
-get_users <- function(user, ...) {
-    if (!missing(user)) {
-        travisHTTP("GET", path = paste0("/users/", user), ...)
-    } else {
-        travisHTTP("GET", path = paste0("/users"), ...)
-    }
-}
-
-sync_users <- function(...) {
-    travisHTTP("POST", path = paste0("/users/sync"), ...)
-}
-
 
 # lint
-
