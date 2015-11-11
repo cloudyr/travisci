@@ -46,9 +46,9 @@ function(username,
     }
     base <- match.arg(base)
     r <- httr::POST(paste0(base, "/auth/github"), 
-                    add_headers(Accept = "application/vnd.travis-ci.2+json"),
-                    body = list(github_token = gh), encode = "json", verbose())
-    travis_token <- jsonlite::fromJSON(content(r, "text"))$access_token
+                    httr::add_headers(Accept = "application/vnd.travis-ci.2+json"),
+                    body = list(github_token = gh), encode = "json")
+    travis_token <- jsonlite::fromJSON(httr::content(r, "text"))$access_token
     if (setenv) {
         Sys.setenv("TRAVIS_CI_TOKEN" = travis_token)
     }

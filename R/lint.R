@@ -16,5 +16,5 @@
 #' @export
 travis_lint <- function(file, ...) {
     travisHTTP("GET", path = paste0("/requests"), 
-               body = list(content = upload_file(file)), ...)
+               body = list(content = httr::upload_file(file)), ...)
 }
