@@ -24,6 +24,9 @@ get_job <- function(job, ...) {
     travisHTTP("GET", path = paste0("/jobs/", job), ...)
 }
 
+# print.travis_job <- function(x, ...) {}
+
+
 #' @export
 #' @rdname get_job
 cancel_job <- function(job, ...) {
