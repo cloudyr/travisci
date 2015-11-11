@@ -25,6 +25,16 @@ get_repo <- function(repo, ...) {
     structure(travisHTTP("GET", path = paste0("/repos/", repo), ...)$repo, class = "travis_repo")
 }
 
+print.travis_repo <- function(x, ...) {
+    cat("Repo (", x$id, "): ", x$slug, "\n", sep = "")
+    cat("Active: ", as.character(x$active), "\n", sep = "")
+    cat("Description: ", x$description, "\n", sep = "")
+    cat("Language: ", x$github_language, "\n", sep = "")
+    cat("Last Build (", x$last_build_id, ") Status: ", x$last_build_state, "\n", sep = "")
+    cat("Last Build Finished: ", x$last_build_finished_at, "\n\n", sep = "")
+    invisible(x)
+}
+
 #' @title Get Branch
 #' @description Retrieve branches for a repo
 #' @details This can retrieve a list of recent branches for a given repo, or if \code{branch} is specified, details about a specific branch.
