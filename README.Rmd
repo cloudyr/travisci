@@ -78,7 +78,7 @@ after_succes:
 - Rscript -e "travisci::restart_last_build('username/PackageB')"
 ```
 
-A more complicated approach would restart the build, then use `get_build()` to determine whether the restarted build was successful.
+A more complicated approach would restart the build, then use `get_build()` to determine whether the restarted PackageB build was successful by examining the `state` value for the build, which can be "created", "started", "passed", "failed", or "canceled". A simple `while` loop with period checking of the build state would allow one to further trigger a notification or a build failure for PackageA.
 
 ---
 [![cloudyr project logo](http://i.imgur.com/JHS98Y7.png)](https://github.com/cloudyr)
