@@ -67,7 +67,16 @@ e <- add_env_vars("cloudyr/travisci", var = list(VAR1 = "value1", VAR2 = "value2
 delete_env_vars("cloudyr/travisci", id = e[[1]]$id)
 ```
 
+### Trigger Dependent Builds ###
 
+If you have two packages (PackageA and PackageB), in which PackageB depends on PackageA, you may want to trigger builds of PackageB every time you push changes to PackageA in order to test functionality in the dependent package. To do this, you can write an entry in your PackageA `.travis.yml` that will use travisci to trigger a build of PackageB. To do this, you also will need to supply an encrypted Travis-CI token into the PackageA repo so that the code will work (or include an encrypted GitHub token, so you can authenticate). Your `.travis.yml` will need the following:
+
+```
+after_succes:
+- Rscript -e "travisci::restart_last_build('username/PackageB')"
+```
+
+A more complicated approach would restart the build, then use `get_build()` to determine whether the restarted build was successful.
 
 ---
 [![cloudyr project logo](http://i.imgur.com/JHS98Y7.png)](https://github.com/cloudyr)

@@ -4,10 +4,12 @@
 \alias{get_requests}
 \title{GitHub Requests}
 \usage{
-get_requests(request, ...)
+get_requests(repo, request, ...)
 }
 \arguments{
-\item{request}{Optionally, a numeric request ID.}
+\item{repo}{Optionally, a numeric repository ID (such as returned by this function) or a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}). Must specify either \code{repo} or \code{request}.}
+
+\item{request}{Optionally, a numeric request ID. Must specify either \code{repo} or \code{request}.}
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 }

@@ -3,11 +3,14 @@
 \name{cancel_build}
 \alias{cancel_build}
 \alias{restart_build}
+\alias{restart_last_build}
 \title{Cancel and Restart Builds}
 \usage{
 cancel_build(build, ...)
 
 restart_build(build, ...)
+
+restart_last_build(repo, ...)
 }
 \arguments{
 \item{build}{A numeric value specifying a build number.}
@@ -15,7 +18,7 @@ restart_build(build, ...)
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 }
 \value{
-A list.
+For \code{cancel_build} and \code{restart_build}, a logical that is \code{TRUE} if the operation succeeded. For \code{restart_last_build}, the build number is stored in the \code{build_id} attributes.
 }
 \description{
 Cancel and restart Travis-CI builds

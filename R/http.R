@@ -46,8 +46,9 @@ travisHTTP <- function(verb = "GET",
             r <- httr::PATCH(url, body = body, query = query, h, ...)
         }
     }
+    httr::warn_for_status(r)
     out <- httr::content(r, "parsed")
-    if ("error" %in% names(out)) {
+    if (!is.null(names(out)) && "error" %in% names(out)) {
         warning(out$error$message)
     }
     out
