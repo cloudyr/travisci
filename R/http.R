@@ -35,9 +35,9 @@ travisHTTP <- function(verb = "GET",
         }
     } else if (verb == "POST") {
         if(body == "") {
-          r <- httr::PUT(url, query = query, h, ...)
+          r <- httr::POST(url, query = query, h, ...)
         } else {
-          r <- httr::PUT(url, body = body, query = query, h, ...)
+          r <- httr::POST(url, body = body, query = query, h, ...)
         }
     } else if (verb == "PATCH") {
         if(body == "") {
@@ -46,5 +46,9 @@ travisHTTP <- function(verb = "GET",
             r <- httr::PATCH(url, body = body, query = query, h, ...)
         }
     }
-    return(httr::content(r, "parsed"))
+    out <- httr::content(r, "parsed")
+    if ("error" %in% names(out)) {
+        warning(out$error$message)
+    }
+    out
 }

@@ -25,15 +25,31 @@
 #' @export
 get_builds <- function(repo, build, ...) {
     if (!missing(repo) & !missing(build)) {
-        travisHTTP("GET", path = paste0("/repos/", repo, "/builds/", build), ...)
+        out <- travisHTTP("GET", path = paste0("/repos/", repo, "/builds/", build), ...)
+        structure(list(build = `class<-`(out$builds, "travis_build"), 
+                       commit = `class<-`(out$commit, "travis_commit"),
+                       jobs = lapply(out$jobs, `class<-`, "travis_job"),
+                       annotations = out$annotations))
     } else if(!missing(repo)) {
-        travisHTTP("GET", path = paste0("/repos/", repo, "/builds"), ...)
+        out <- travisHTTP("GET", path = paste0("/repos/", repo, "/builds"), ...)
+        structure(list(builds = lapply(out$builds, `class<-`, "travis_build"), 
+                       commits = lapply(out$commits, `class<-`, "travis_commit")))
     } else if(!missing(build)) {
-        travisHTTP("GET", path = paste0("/builds/", build), ...)
+        out <- travisHTTP("GET", path = paste0("/builds/", build), ...)
+        structure(list(build = `class<-`(out$builds, "travis_build"), 
+                       commit = `class<-`(out$commit, "travis_commit"),
+                       jobs = lapply(out$jobs, `class<-`, "travis_job"),
+                       annotations = out$annotations))
     } else {
-        travisHTTP("GET", path = "/builds", ...)
+        out <- travisHTTP("GET", path = "/builds", ...)
+        structure(list(builds = lapply(out$builds, `class<-`, "travis_build"), 
+                       commits = lapply(out$commits, `class<-`, "travis_commit")))
+        
     }
 }
+
+# print.travis_build <- function(x, ...) {}
+# print.travis_commit <- function(x, ...) {}
 
 #' @title Cancel and Restart Builds
 #' @description Cancel and restart Travis-CI builds
@@ -58,11 +74,21 @@ get_builds <- function(repo, build, ...) {
 #' }
 #' @export
 cancel_build <- function(build, ...) {
-    travisHTTP("POST", path = paste0("/builds/", build, "/cancel"), ...)
+    out <- travisHTTP("POST", path = paste0("/builds/", build, "/cancel"), ...)
+    if (is.null(out)) {
+        TRUE
+    } else {
+        FALSE
+    }
 }
 
 #' @rdname cancel_build
 #' @export
 restart_build <- function(build, ...) {
-    travisHTTP("POST", path = paste0("/builds/", build, "/restart"), ...)
+    out <- travisHTTP("POST", path = paste0("/builds/", build, "/restart"), ...)
+    if (out$result) {
+        TRUE
+    } else {
+        FALSE
+    }
 }
