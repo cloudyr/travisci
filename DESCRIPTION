@@ -1,7 +1,7 @@
 Package: travisci
 Type: Package
 Title: Travis-CI API Client Package
-Version: 0.1.5
+Version: 0.1.6
 Date: 2015-11-12
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"))

@@ -14,10 +14,10 @@ set_repo_settings(repo, settings = list(), ...)
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 
-\item{settings}{A list containing named settings and their values. See results of \code{get_repo_settings} and \href{http://docs.travis-ci.com/api/#settings:-general}{the API documentation} for details.}
+\item{settings}{A list containing named settings and their values. See results of \code{get_repo_settings} and \href{http://docs.travis-ci.com/api/#settings:-general}{the API documentation} for details. The response from either \code{get_repo_settings} or \code{set_repo_settings} can be passed directly as the value of this argument.}
 }
 \value{
-A list.
+A list of settings.
 }
 \description{
 Get or set repository settings
@@ -31,9 +31,13 @@ Get or set repository settings
 auth_travis()
 
 # get settings
-get_repo_settings(repo = "cloudyr/travisci")
+g <- get_repo_settings(repo = "cloudyr/travisci")
 
-# specify new settings
+# pass modified settings list
+g[[1]] <- TRUE
+set_repo_settings(repo = "cloudyr/travisci", g)
+
+# specify new settings individually
 set_repo_settings(repo = "cloudyr/travisci", list("builds_only_with_travis_yml" = FALSE))
 }
 }

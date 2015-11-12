@@ -1,3 +1,7 @@
+# CHANGES TO travisci 0.2 #
+
+* Added S3 print methods for most object classes.
+
 # CHANGES TO travisci 0.1 #
 
 * Initial release.
