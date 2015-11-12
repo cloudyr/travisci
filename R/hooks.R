@@ -20,7 +20,18 @@
 #' }
 #' @export
 get_hooks <- function(...) {
-    travisHTTP("GET", path = paste0("/hooks"), ...)
+    out <- travisHTTP("GET", path = paste0("/hooks"), ...)$hooks
+    lapply(out, `class<-`, "travis_hook")
+}
+
+print.travis_hook <- function(x, ...) {
+    cat("Hook (", x$id, "): ", x$name, "\n", sep = "")
+    cat("Owner: ", x$owner_name, "\n", sep = "")
+    cat("Description: ", x$description, "\n", sep = "")
+    cat("Active:  ", as.character(x$active), "\n", sep = "")
+    cat("Private: ", as.character(x$active), "\n", sep = "")
+    cat("Admin:   ", as.character(x$active), "\n", sep = "")
+    invisible(x)
 }
 
 #' @export
