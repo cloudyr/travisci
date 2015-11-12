@@ -59,7 +59,15 @@ get_broadcasts <- function(...) {
 #' @seealso \code{\link{get_users}}, \code{\link{get_permissions}}
 #' @export
 get_accounts <- function(...) {
-    travisHTTP("GET", path = "/accounts", ...)
+    lapply(travisHTTP("GET", path = "/accounts", ...)$accounts, `class<-`, "travis_account")
+}
+
+print.travis_account <- function(x, ...) {
+    cat("Account (", x$id, "): ", x$name, "\n", sep = "")
+    cat("Type: ", x$type, "\n", sep = "")
+    cat("Login: ", x$login, "\n", sep = "")
+    cat("Repos: ", x$repos_count, "\n", sep = "")
+    invisible(x)
 }
 
 #' @title Get GitHub Permissions
