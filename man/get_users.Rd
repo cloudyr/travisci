@@ -10,7 +10,7 @@ get_users(user, ...)
 sync_users(...)
 }
 \arguments{
-\item{user}{Optionally, a character string specifying a user. If missing, all users are returned.}
+\item{user}{Optionally, an integer specifying a user ID. If missing, all users are returned.}
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 }
