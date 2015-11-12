@@ -93,7 +93,7 @@ get_permissions <- function(...) {
 #' @title Travis CI Users
 #' @description Retrieve and sync Travis CI users
 #' @details \code{get_users} retrieves information about GitHub users attached to a Travis account. \code{sync_users} syncs Travis's local cache of users against GitHub.
-#' @param user Optionally, a character string specifying a user. If missing, all users are returned.
+#' @param user Optionally, an integer specifying a user ID. If missing, all users are returned.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.
 #' @examples
@@ -114,14 +114,23 @@ get_permissions <- function(...) {
 #' @export
 get_users <- function(user, ...) {
     if (!missing(user)) {
-        travisHTTP("GET", path = paste0("/users/", user), ...)
+        out <- travisHTTP("GET", path = paste0("/users/", user), ...)
     } else {
-        travisHTTP("GET", path = paste0("/users"), ...)
+        out <- travisHTTP("GET", path = paste0("/users"), ...)
     }
+    lapply(out, `class<-`, "travis_user")
+}
+
+print.travis_user <- function(x, ...) {
+    cat("User (", x$id, "): ", x$name, "\n", sep = "")
+    cat("Login: ", x$login, "\n", sep = "")
+    cat("Email: ", x$email, "\n", sep = "")
+    cat("Correct scopes: ", as.character(x$correct_scopes), "\n", sep = "")
+    invisible(x)
 }
 
 #' @export
 #' @rdname get_users
 sync_users <- function(...) {
-    travisHTTP("POST", path = paste0("/users/sync"), ...)
+    travisHTTP("POST", path = paste0("/users/sync"), ...)$result
 }
