@@ -37,7 +37,7 @@ function(username,
         p <- httr::POST("https://api.github.com/authorizations", 
                         httr::authenticate(username, password), 
                         body = b, encode = "json")
-        gh <- content(p)$token
+        gh <- httr::content(p)$token
         if (clean) {
             on.exit(httr::DELETE(paste0("https://api.github.com/authorizations/", 
                                  httr::content(p)$id), 
