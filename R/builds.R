@@ -48,8 +48,35 @@ get_builds <- function(repo, build, ...) {
     }
 }
 
-# print.travis_build <- function(x, ...) {}
-# print.travis_commit <- function(x, ...) {}
+print.travis_build <- function(x, ...) {
+    cat("Build (", x$id, ") state: ", x$state, "\n", sep = "")
+    cat("Type:   ", x$event_type, "\n", sep = "")
+    if (x$pull_request) {
+        cat("  PR (", x$pull_request_number, "): ", x$pull_request_title, "\n", sep = "")
+    }
+    cat("Repo:   ", x$repository_id, "\n", sep = "")
+    cat("Commit: ", x$commit_id, "\n", sep = "")
+    cat("Started:  ", x$started_at, "\n", sep = "")
+    cat("Finished: ", x$finished_at, "\n", sep = "")
+    invisible(x)
+}
+
+print.travis_commit <- function(x, ...) {
+    cat("Commit (", x$id, "): ", x$message, "\n", sep = "")
+    cat("Author: ", x$author_name, " (", x$author_email, ")\n", sep = "")
+    cat("SHA: ", x$sha, "\n", sep = "")
+    cat("Commited: ", x$committed_at, "\n", sep = "")
+    invisible(x)
+}
+
+print.travis_job <- function(x, ...) {
+    cat("Job (", x$id, ") state: ", x$state, "\n", sep = "")
+    cat("Repo (", x$repository_id, "): ", x$repository_slug, "\n", sep = "")
+    cat("Build: ", x$build_id, ", Commit: ", x$commit_id, "\n", sep = "")
+    cat("Started:  ", x$started_at, "\n", sep = "")
+    cat("Finished: ", x$finished_at, "\n", sep = "")
+    invisible(x)
+}
 
 #' @title Cancel and Restart Builds
 #' @description Cancel and restart Travis-CI builds

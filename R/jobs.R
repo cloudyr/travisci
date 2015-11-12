@@ -21,11 +21,11 @@
 #' @seealso \code{\link{get_annotations}}, \code{\link{get_logs}}
 #' @export
 get_job <- function(job, ...) {
-    travisHTTP("GET", path = paste0("/jobs/", job), ...)
+    out <- travisHTTP("GET", path = paste0("/jobs/", job), ...)
+    structure(list(job = `class<-`(out$job, "travis_job"),
+                   commit = `class<-`(out$commit, "travis_commit"),
+                   annotations = lapply(out$annotations, `class<-`, "travis_annotation")))
 }
-
-# print.travis_job <- function(x, ...) {}
-
 
 #' @export
 #' @rdname get_job
