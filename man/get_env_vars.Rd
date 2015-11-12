@@ -16,7 +16,7 @@ update_env_vars(repo, id, var = list(), ...)
 delete_env_vars(repo, id, ...)
 }
 \arguments{
-\item{repo}{A character string specifying a repo slug (i.e., \samp{cloudyr/travisci}) or a numeric Travis-CI repository ID. If a slug is used, it will be implicitly converted to a repository ID in some cases where only the latter is accepted.}
+\item{repo}{A character string specifying a repo slug (i.e., \samp{cloudyr/travisci}) a numeric Travis-CI repository ID, or an object of class \dQuote{travis_repo}. If a slug is used, it will be implicitly converted to a repository ID in some cases where only the latter is accepted.}
 
 \item{id}{An alphanumeric ID for a given environment variable, for example as returned by this function with this argument missing.}
 

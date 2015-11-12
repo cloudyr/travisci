@@ -7,9 +7,9 @@
 get_builds(repo, build, ...)
 }
 \arguments{
-\item{repo}{Optionally, a numeric repository ID (such as returned by this function) or a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}).}
+\item{repo}{Optionally, a numeric repository ID (such as returned by this function), a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}), or an object of class \dQuote{travis_repo}.}
 
-\item{build}{A numeric value specifying a build number.}
+\item{build}{Optionally, a numeric value specifying a build number, or an object of class \dQuote{travis_build}.}
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 }

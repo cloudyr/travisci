@@ -13,7 +13,7 @@ restart_build(build, ...)
 restart_last_build(repo, ...)
 }
 \arguments{
-\item{build}{A numeric value specifying a build number.}
+\item{build}{A numeric value specifying a build number or an object of class \dQuote{travis_build}.}
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 }

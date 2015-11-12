@@ -10,7 +10,7 @@ get_repo_settings(repo, ...)
 set_repo_settings(repo, settings = list(), ...)
 }
 \arguments{
-\item{repo}{A numeric repository ID (such as returned by this function) or a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}).}
+\item{repo}{A numeric repository ID (such as returned by this function), a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}), or an object of class \dQuote{travis_repo}.}
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 

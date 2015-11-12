@@ -15,7 +15,7 @@ disable_hook(hook, ...)
 \arguments{
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 
-\item{hook}{A numeric hook ID.}
+\item{hook}{A numeric hook ID, or an object of class \dQuote{travis_hook}.}
 }
 \value{
 A list.

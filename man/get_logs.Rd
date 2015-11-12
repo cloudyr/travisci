@@ -7,7 +7,7 @@
 get_logs(job, log, ...)
 }
 \arguments{
-\item{job}{A numeric job ID. Must specify \code{job} or \code{log}.}
+\item{job}{A numeric job ID, or an object of class \dQuote{travis_job}. Must specify \code{job} or \code{log}.}
 
 \item{log}{A numeric log ID. Must specify \code{job} or \code{log}.}
 

@@ -1,7 +1,7 @@
 #' @title Get Hooks
 #' @description Retrieve a list of Travis-CI web hooks.
 #' @details \code{get_hooks} retrieves a list of hooks. \code{enable_hook} and \code{disable_hook} enable and disable hooks, respectively.
-#' @param hook A numeric hook ID.
+#' @param hook A numeric hook ID, or an object of class \dQuote{travis_hook}.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.
 #' @examples
@@ -37,15 +37,21 @@ print.travis_hook <- function(x, ...) {
 #' @export
 #' @rdname get_hooks
 enable_hook <- function(hook, ...) {
+    if (inherits(hook, "travis_hook")) {
+        hook <- hook$id
+    }
     travisHTTP("PUT", path = paste0("/hooks/"), 
                body = list(hook = list(id = hook, active = "true")), 
-               encode = "json", ...)
+               encode = "json", ...)$result
 }
 
 #' @export
 #' @rdname get_hooks
 disable_hook <- function(hook, ...) {
+    if (inherits(hook, "travis_hook")) {
+        hook <- hook$id
+    }
     travisHTTP("PUT", path = paste0("/hooks/"), 
                body = list(hook = list(id = hook, active = "false")), 
-               encode = "json", ...)
+               encode = "json", ...)$result
 }

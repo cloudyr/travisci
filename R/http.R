@@ -39,12 +39,20 @@ travisHTTP <- function(verb = "GET",
         } else {
           r <- httr::POST(url, body = body, query = query, h, ...)
         }
+    } else if (verb == "PUT") {
+        if(body == "") {
+          r <- httr::PUT(url, query = query, h, ...)
+        } else {
+          r <- httr::PUT(url, body = body, query = query, h, ...)
+        }
     } else if (verb == "PATCH") {
         if(body == "") {
             r <- httr::PATCH(url, query = query, h, ...)
         } else {
             r <- httr::PATCH(url, body = body, query = query, h, ...)
         }
+    } else {
+        stop("Unrecognized HTTP verb")
     }
     httr::warn_for_status(r)
     out <- httr::content(r, "parsed")

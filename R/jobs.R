@@ -1,7 +1,7 @@
 #' @title Get Job
 #' @description Retrieve a Travis-CI job
 #' @details \code{get_job} retrieves a list of details about a given job. \code{cancel_job} cancels and \code{restart_job} restarts a given job.
-#' @param job A numeric job ID.
+#' @param job A numeric job ID, or an object of class \dQuote{travis_job}.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.
 #' @examples
@@ -21,6 +21,9 @@
 #' @seealso \code{\link{get_annotations}}, \code{\link{get_logs}}
 #' @export
 get_job <- function(job, ...) {
+    if (inherits(job, "travis_job")) {
+        job <- job$id
+    }
     out <- travisHTTP("GET", path = paste0("/jobs/", job), ...)
     structure(list(job = `class<-`(out$job, "travis_job"),
                    commit = `class<-`(out$commit, "travis_commit"),
@@ -43,7 +46,7 @@ restart_job <- function(job, ...) {
 #' @title Job Annotations
 #' @description Retrieve and create job Travis CI annotations
 #' @details \code{get_annotations} retrieves any annotations attached to a Travis CI job. \code{create_annotation} creates a new annotation for a job. Note: As of October, 2015 support for annotations is considered \dQuote{experimental}.
-#' @param job A numeric job ID.
+#' @param job A numeric job ID, or an object of class \dQuote{travis_job}.
 #' @param body A list of arguments specifying the annotation. See \href{http://docs.travis-ci.com/api/#annotations}{API documentation} for details.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.
@@ -62,12 +65,18 @@ restart_job <- function(job, ...) {
 #' @seealso \code{\link{get_jobs}}, \code{\link{get_logs}}
 #' @export
 get_annotations <- function(job, ...) {
+    if (inherits(job, "travis_job")) {
+        job <- job$id
+    }
     travisHTTP("GET", path = paste0("/jobs/", job, "/annotations"), ...)
 }
 
 #' @export
 #' @rdname get_annotations
 create_annotation <- function(job, body = list(), ...) {
+    if (inherits(job, "travis_job")) {
+        job <- job$id
+    }
     travisHTTP("GET", path = paste0("/jobs/", job, "/annotations"), body = body, encode = "json", ...)
 }
 
@@ -75,7 +84,7 @@ create_annotation <- function(job, body = list(), ...) {
 #' @title Job Logs
 #' @description Retrieve logs for Travis CI jobs
 #' @details This can retrieve logs for a given job or a specific log by its job ID.
-#' @param job A numeric job ID. Must specify \code{job} or \code{log}.
+#' @param job A numeric job ID, or an object of class \dQuote{travis_job}. Must specify \code{job} or \code{log}.
 #' @param log A numeric log ID. Must specify \code{job} or \code{log}.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.
@@ -94,6 +103,9 @@ get_logs <- function(job, log, ...) {
     if (!missing(log)) {
         travisHTTP("GET", path = paste0("/logs/", log), ...)
     } else {
+        if (inherits(job, "travis_job")) {
+            job <- job$id
+        }
         travisHTTP("GET", path = paste0("/jobs/", job, "/logs"), ...)
     }
 }

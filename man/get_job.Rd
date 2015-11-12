@@ -13,7 +13,7 @@ cancel_job(job, ...)
 restart_job(job, ...)
 }
 \arguments{
-\item{job}{A numeric job ID.}
+\item{job}{A numeric job ID, or an object of class \dQuote{travis_job}.}
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 }

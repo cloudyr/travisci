@@ -114,6 +114,9 @@ get_permissions <- function(...) {
 #' @export
 get_users <- function(user, ...) {
     if (!missing(user)) {
+        if (inherits(user, "travis_user")) {
+            user <- user$id
+        }
         out <- travisHTTP("GET", path = paste0("/users/", user), ...)
     } else {
         out <- travisHTTP("GET", path = paste0("/users"), ...)

@@ -7,7 +7,7 @@
 get_branch(repo, branch, ...)
 }
 \arguments{
-\item{repo}{A numeric repository ID (such as returned by this function) or a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}).}
+\item{repo}{A numeric repository ID (such as returned by this function), a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}), or an object of class \dQuote{travis_repo}.}
 
 \item{branch}{Optionally, a character string specifying the name of a branch.}
 

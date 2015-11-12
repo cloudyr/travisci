@@ -1,7 +1,7 @@
 #' @title GitHub Requests
 #' @description Examine requests from GitHub to Travis CI
 #' @details This can examine requests made by GitHub to initiate builds on Travis-CI, perhaps when a push fails to execute a build.
-#' @param repo Optionally, a numeric repository ID (such as returned by this function) or a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}). Must specify either \code{repo} or \code{request}.
+#' @param repo Optionally, a numeric repository ID (such as returned by this function), a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}), or an object of class \dQuote{travis_repo}. Must specify either \code{repo} or \code{request}.
 #' @param request Optionally, a numeric request ID. Must specify either \code{repo} or \code{request}.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.
@@ -20,7 +20,9 @@
 #' @export
 get_requests <- function(repo, request, ...) {
     if (missing(request)) {
-        if (is.numeric(repo)) {
+        if (inherits(repo, "travis_rep")) {
+            repo <- repo$id
+        } else if (is.numeric(repo)) {
             query <- list(slug = repo)
         } else {
             query <- list(repository_id = repo)

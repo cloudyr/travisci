@@ -7,7 +7,7 @@
 get_requests(repo, request, ...)
 }
 \arguments{
-\item{repo}{Optionally, a numeric repository ID (such as returned by this function) or a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}). Must specify either \code{repo} or \code{request}.}
+\item{repo}{Optionally, a numeric repository ID (such as returned by this function), a character string specifying a GitHub repository \dQuote{slug} (e.g., \samp{ghusername/ghreponame}), or an object of class \dQuote{travis_repo}. Must specify either \code{repo} or \code{request}.}
 
 \item{request}{Optionally, a numeric request ID. Must specify either \code{repo} or \code{request}.}
 
