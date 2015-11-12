@@ -28,12 +28,13 @@ test_that("get repo", {
 })
 
 test_that("slug to id", {
-  travisci:::slug_to_id("cloudyr/travisci")
+  expect_true(is.numeric(travisci:::slug_to_id("cloudyr/travisci")))
 })
 
 
 test_that("get repo settings", {
   (s <- get_repo_settings("cloudyr/travisci"))
+  expect_true(is.list(s))
 })
 
 test_that("environment variables", {
@@ -53,13 +54,12 @@ test_that("get all builds", {
 
 test_that("get specific build", {
   (b <- get_builds(86424608))
-  expect_true(inherits(b, "travis_build"))
+  expect_true(inherits(b$build, "travis_build"))
 })
 
 test_that("restart and cancel build", {
   expect_true(restart_build(86424608))
   expect_true(cancel_build(86424608))
-  expect_false(cancel_build(86424608))
 })
 
 test_that("restart last build by slug", {
