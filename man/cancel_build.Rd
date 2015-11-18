@@ -10,10 +10,10 @@ cancel_build(build, ...)
 
 restart_build(build, ...)
 
-restart_last_build(repo, ...)
+restart_last_build(build, ...)
 }
 \arguments{
-\item{build}{A numeric value specifying a build number or an object of class \dQuote{travis_build}.}
+\item{build}{A numeric value specifying a build number or an object of class \dQuote{travis_build}. (For \code{restart_last_build}, this can also be a character string specifying a GitHub repository, such as \dQuote{user/repo}.)}
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 }

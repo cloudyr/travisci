@@ -93,7 +93,7 @@ print.travis_job <- function(x, ...) {
 #' @title Cancel and Restart Builds
 #' @description Cancel and restart Travis-CI builds
 #' @details \code{cancel_build} will cancel a given build. \code{restart_build} will restart a cancelled build.
-#' @param build A numeric value specifying a build number or an object of class \dQuote{travis_build}.
+#' @param build A numeric value specifying a build number or an object of class \dQuote{travis_build}. (For \code{restart_last_build}, this can also be a character string specifying a GitHub repository, such as \dQuote{user/repo}.)
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return For \code{cancel_build} and \code{restart_build}, a logical that is \code{TRUE} if the operation succeeded. For \code{restart_last_build}, the build number is stored in the \code{build_id} attributes.
 #' @seealso \code{\link{get_builds}}
@@ -140,10 +140,13 @@ restart_build <- function(build, ...) {
 
 #' @rdname cancel_build
 #' @export
-restart_last_build <- function(repo, ...) {
+restart_last_build <- function(build, ...) {
     if (inherits(build, "travis_build")) {
-        build <- build$id
+        b <- build$id
+    } else if (is.numeric(build)) {
+        b <- build
+    } else {
+        b <- get_builds(build)$builds[[1]]$id
     }
-    b <- get_builds(repo)$builds[[1]]$id
     structure(restart_build(b), build_id = b)
 }
