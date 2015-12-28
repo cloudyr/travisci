@@ -32,6 +32,12 @@ test_that("slug to id", {
 })
 
 
+test_that("Enable/Disable repo hook", {
+  expect_true(disable_hook("cloudyr/travisci"), "Disable repo hook")
+  expect_true(enable_hook("cloudyr/travisci"), "Enable repo hook")
+})
+
+
 test_that("get repo settings", {
   (s <- get_repo_settings("cloudyr/travisci"))
   expect_true(is.list(s))

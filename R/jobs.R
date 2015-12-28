@@ -50,7 +50,7 @@ restart_job <- function(job, ...) {
 #' @param body A list of arguments specifying the annotation. See \href{http://docs.travis-ci.com/api/#annotations}{API documentation} for details.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.
-#' @seealso \code{\link{get_jobs}}
+#' @seealso \code{\link{get_job}}
 #' @examples
 #' \dontrun{
 #' # authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
@@ -62,7 +62,7 @@ restart_job <- function(job, ...) {
 #' # create a new annotation
 #' create_annotations(12345, body = list(description = "job description", status = "passed"))
 #' }
-#' @seealso \code{\link{get_jobs}}, \code{\link{get_logs}}
+#' @seealso \code{\link{get_job}}, \code{\link{get_logs}}
 #' @export
 get_annotations <- function(job, ...) {
     if (inherits(job, "travis_job")) {
@@ -88,7 +88,7 @@ create_annotation <- function(job, body = list(), ...) {
 #' @param log A numeric log ID. Must specify \code{job} or \code{log}.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.
-#' @seealso \code{\link{get_jobs}}
+#' @seealso \code{\link{get_job}}
 #' @examples
 #' \dontrun{
 #' # authenticate based on Sys.setenv("GITHUB_TOKEN" = "sometoken")
@@ -97,7 +97,7 @@ create_annotation <- function(job, body = list(), ...) {
 #' # get logs for a job
 #' get_logs(job = 12345)
 #' }
-#' @seealso \code{\link{get_jobs}}, \code{\link{get_annotations}}
+#' @seealso \code{\link{get_job}}, \code{\link{get_annotations}}
 #' @export
 get_logs <- function(job, log, ...) {
     if (!missing(log)) {

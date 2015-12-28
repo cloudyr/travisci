@@ -1,6 +1,6 @@
 #' @title Get Hooks
 #' @description Retrieve a list of Travis-CI web hooks.
-#' @details \code{get_hooks} retrieves a list of hooks. \code{enable_hook} and \code{disable_hook} enable and disable hooks, respectively.
+#' @details \code{get_hooks} retrieves a list of hooks (i.e., repositories that are linked to Travis CI). \code{enable_hook} and \code{disable_hook} enable and disable hooks, respectively.
 #' @param hook A numeric hook ID, or an object of class \dQuote{travis_hook}.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.

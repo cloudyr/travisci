@@ -32,8 +32,26 @@ auth_travis()
 
 A token can also be created [via the browser](https://github.com/settings/tokens). `auth_travis()` will, as a side effect, store the Travis-CI token received into the `TRAVIS_CI_TOKEN` environment variable.
 
+### Setting up Travis for a Repo ###
 
-More coming soon...
+Create a new package (using `devtools::create()`, `package.skeleton()`, etc.) and then from that directory do the following, use devtools to setup GitHub and initial a `.travis.yml` file:
+
+```R
+library("devtools")
+use_github()
+use_travis()
+```
+
+Then use travisci to enable the webhook that will trigger Travis CI builds for every push to the GitHub repo:
+
+```R
+library("travisci")
+auth_travis()
+sync_users()
+h <- get_hooks()
+p <- as.package(".")$package
+enable_hook(h[[which(unlist(lapply(g, `[`, "name")) == p)]])
+```
 
 
 ### Getting repos and branches ###
