@@ -2,21 +2,6 @@
 
 **travisci** is a simple client package for the [Travis-CI](http://travis-ci.org/) [REST API](http://docs.travis-ci.com/api/#overview). It can control containerized builds of R packages and other software projects as part of a continuous integration workflow. To learn more about developing R packages with Travis, see [the Travis documentation for R](http://docs.travis-ci.com/user/languages/r/).
 
-## Installation ##
-
-[![CRAN](http://www.r-pkg.org/badges/version/travisci)](http://cran.r-project.org/package=travisci)
-[![Build Status](https://travis-ci.org/cloudyr/travisci.png?branch=master)](https://travis-ci.org/cloudyr/travisci) [![codecov.io](http://codecov.io/github/cloudyr/travisci/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/travisci?branch=master)
-
-This package is not yet on CRAN. To install the latest development version from GitHub, run the following:
-
-```R
-if(!require("devtools")){
-    install.packages("devtools")
-    library("devtools")
-}
-install_github("cloudyr/travisci")
-```
-
 ## Code Examples ##
 
 To use the Travis-CI API, you will need a Github account and an authentication key. That authentication key will be used temporarily by the Travis-CI API to generate a further access key that will authenticate subsequent API requests. To do this, you'll need to store a GitHub token in the `GITHUB_TOKEN` environment variable. **travisci** then uses this to populate a `TRAVIS_CI_TOKEN` environment variable, which will be used for subsequent authentications.
@@ -104,6 +89,24 @@ r_github_packages:
 ```
 
 A more complicated approach would restart the PackageB build, then use `get_build()` to determine whether the restarted PackageB build was successful by examining the `state` value for the build, which can be "created", "started", "passed", "failed", or "canceled". A simple `while` loop with period checking of the build state would allow one to further trigger a notification or a build failure for PackageA.
+
+## Installation ##
+
+[![CRAN](http://www.r-pkg.org/badges/version/travisci)](http://cran.r-project.org/package=travisci)
+[![Build Status](https://travis-ci.org/cloudyr/travisci.png?branch=master)](https://travis-ci.org/cloudyr/travisci) [![codecov.io](http://codecov.io/github/cloudyr/travisci/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/travisci?branch=master)
+
+This package is not yet on CRAN. To install the latest development version from GitHub:
+
+```R
+# latest stable version
+install.packages("travisci", repos = c(getOption("repos"), "http://cloudyr.github.io/drat"))
+
+# latest (unstable) version from GitHub
+if (!require("ghit")) {
+    install.packages("ghit")
+}
+ghit::install_github("cloudyr/travisci")
+```
 
 ---
 [![cloudyr project logo](http://i.imgur.com/JHS98Y7.png)](https://github.com/cloudyr)
