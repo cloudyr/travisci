@@ -5,8 +5,9 @@
 \title{Authorize Travis-CI API}
 \usage{
 auth_travis(username, password, setenv = TRUE, clean = !missing(username),
-  gh_token = Sys.getenv("GITHUB_TOKEN"),
-  base = c("https://api.travis-ci.org", "https://api.travis-ci.com"))
+  force = FALSE, gh_token = c(Sys.getenv("GITHUB_TOKEN"),
+  Sys.getenv("GITHUB_PAT")), base = c("https://api.travis-ci.org",
+  "https://api.travis-ci.com"))
 }
 \arguments{
 \item{username}{A character string containing a GitHub username.}
@@ -16,6 +17,8 @@ auth_travis(username, password, setenv = TRUE, clean = !missing(username),
 \item{setenv}{A logical indicating whether to set the \env{TRAVIS_CI_TOKEN} environment variable. If \code{FALSE}, this will have to be passed to all other functions.}
 
 \item{clean}{A logical specifying whether to delete the temporarily generated GitHub personal access token from the GitHub account. Deafult is \code{TRUE} if \code{username} is specified. This is ignored if passing a GitHub token directly.}
+
+\item{force}{A logical indicating whether to force the operation and override an already stored value in \env{TRAVIS_CI_TOKEN}.}
 
 \item{gh_token}{An optional character string  specifying a GitHub personal access token. This is ignored if \code{username} is supplied.}
 
@@ -28,7 +31,7 @@ A character string containing the Travis-CI API token, invisibly.
 Initialize a Travis-CI API token
 }
 \details{
-Using the Travis-CI API requires an API token (see \href{http://docs.travis-ci.com/api/#authentication}{API documentation} for details). This function implements a sort of handshake that uses a GitHub personal access token to generate a Travis token (to store in an environment variable, \env{TRAVIS_CI_TOKEN}) or, alternatively, uses a GitHub username and password pair to generate such a token, conduct the handshake, and then cleanup the generated, temporary token. The easiest way to use the function is to set the \env{GITHUB_TOKEN} environment variable, then simply call \code{auth_travis()} with no arguments, but see examples.
+Using the Travis-CI API requires an API token (see \href{http://docs.travis-ci.com/api/#authentication}{API documentation} for details). This function implements a sort of handshake that uses a GitHub personal access token to generate a Travis token (to store in an environment variable, \env{TRAVIS_CI_TOKEN}) or, alternatively, uses a GitHub username and password pair to generate such a token, conduct the handshake, and then cleanup the generated, temporary token. The easiest way to use the function is to set the \env{GITHUB_TOKEN} and \env{GITHUB_PAT} environment variables, then simply call \code{auth_travis()} with no arguments, but see examples.
 }
 \examples{
 \dontrun{

@@ -23,7 +23,7 @@
 #' @export
 get_repo <- function(repo, ...) {
     if (inherits(repo, "travis_repo")) {
-        repo <- repo$id
+        repo <- slug_to_id(repo)
     }
     structure(travisHTTP("GET", path = paste0("/repos/", repo), ...)$repo, class = "travis_repo")
 }
@@ -61,9 +61,7 @@ print.travis_repo <- function(x, ...) {
 #' @seealso \code{\link{get_repo}}, \code{\link{get_builds}}
 #' @export
 get_branch <- function(repo, branch, ...) {
-    if (inherits(repo, "travis_repo")) {
-        repo <- repo$id
-    }
+    repo <- slug_to_id(repo)
     if (missing(branch)) {
         out <- travisHTTP("GET", path = paste0("/repos/", repo, "/branches"), ...)
         structure(list(branches = lapply(out$branches, `class<-`, "travis_branch"),
@@ -111,11 +109,7 @@ print.travis_branch <- function(x, ...) {
 #' @seealso \code{\link{get_repo}}, \code{\link{get_env_vars}}
 #' @export
 get_repo_settings <- function(repo, ...) {
-    if (inherits(repo, "travis_repo")) {
-        repo <- repo$id
-    } else {
-        repo <- slug_to_id(repo)
-    }
+    repo <- slug_to_id(repo)
     travisHTTP("GET", path = paste0("/repos/", repo, "/settings"), ...)$settings
 }
 
@@ -131,11 +125,7 @@ set_repo_settings <- function(repo, settings = list(), ...) {
            "build_pull_requests",
            "maximum_number_of_builds")
     settings <- settings[names(settings) %in% s]
-    if (inherits(repo, "travis_repo")) {
-        repo <- repo$id
-    } else {
-        repo <- slug_to_id(repo)
-    }
+    repo <- slug_to_id(repo)
     travisHTTP("PATCH", path = paste0("/repos/", repo, "/settings"), 
                body = list(settings = settings), encode = "json", ...)$settings
 }

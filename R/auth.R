@@ -1,12 +1,13 @@
 #' @title Authorize Travis-CI API
 #' @description Initialize a Travis-CI API token
-#' @details Using the Travis-CI API requires an API token (see \href{http://docs.travis-ci.com/api/#authentication}{API documentation} for details). This function implements a sort of handshake that uses a GitHub personal access token to generate a Travis token (to store in an environment variable, \env{TRAVIS_CI_TOKEN}) or, alternatively, uses a GitHub username and password pair to generate such a token, conduct the handshake, and then cleanup the generated, temporary token. The easiest way to use the function is to set the \env{GITHUB_TOKEN} environment variable, then simply call \code{auth_travis()} with no arguments, but see examples.
 #' @param username A character string containing a GitHub username.
 #' @param password A character string containing a GitHub password for account \code{username}.
 #' @param setenv A logical indicating whether to set the \env{TRAVIS_CI_TOKEN} environment variable. If \code{FALSE}, this will have to be passed to all other functions.
 #' @param clean A logical specifying whether to delete the temporarily generated GitHub personal access token from the GitHub account. Deafult is \code{TRUE} if \code{username} is specified. This is ignored if passing a GitHub token directly.
+#' @param force A logical indicating whether to force the operation and override an already stored value in \env{TRAVIS_CI_TOKEN}.
 #' @param gh_token An optional character string  specifying a GitHub personal access token. This is ignored if \code{username} is supplied.
 #' @param base A character string specifying the base URL for the API. By default this is \url{https://api.travis-ci.org}, but may need to be changed if using a Travis Pro or enterprise account.
+#' @details Using the Travis-CI API requires an API token (see \href{http://docs.travis-ci.com/api/#authentication}{API documentation} for details). This function implements a sort of handshake that uses a GitHub personal access token to generate a Travis token (to store in an environment variable, \env{TRAVIS_CI_TOKEN}) or, alternatively, uses a GitHub username and password pair to generate such a token, conduct the handshake, and then cleanup the generated, temporary token. The easiest way to use the function is to set the \env{GITHUB_TOKEN} and \env{GITHUB_PAT} environment variables, then simply call \code{auth_travis()} with no arguments, but see examples.
 #' @return A character string containing the Travis-CI API token, invisibly.
 #' @examples
 #' \dontrun{
@@ -28,9 +29,14 @@ function(username,
          password, 
          setenv = TRUE, 
          clean = !missing(username), 
-         gh_token = Sys.getenv("GITHUB_TOKEN"), 
+         force = FALSE,
+         gh_token = c(Sys.getenv("GITHUB_TOKEN"), Sys.getenv("GITHUB_PAT")),
          base = c("https://api.travis-ci.org", "https://api.travis-ci.com")) {
-    gh <- gh_token
+    if (Sys.getenv("TRAVIS_CI_TOKEN") != "" && !isTRUE(force)) {
+        message("Environment variable 'TRAVIS_CI_TOKEN' is already set.")
+        return(invisible(NULL))
+    }
+    gh <- gh_token[gh_token != ""][1]
     if (!missing(username)) {
         b <- list(scopes = c("read:org", "user:email", "repo_deployment", "repo:status", "write:repo_hook"), 
                   note = "temporary token to auth against travis")
@@ -40,15 +46,18 @@ function(username,
         gh <- httr::content(p)$token
         if (clean) {
             on.exit(httr::DELETE(paste0("https://api.github.com/authorizations/", 
-                                 httr::content(p)$id), 
+                                 httr::content(p)[["id"]]), 
                                  httr::authenticate(username, password), encode = "json"))
         }
+    }
+    if (is.na(gh) || gh == "") {
+        stop("No value supplied for 'gh_token' or available\n  in environment variable 'GITHUB_TOKEN'", call. = FALSE)
     }
     base <- match.arg(base)
     r <- httr::POST(paste0(base, "/auth/github"), 
                     httr::add_headers(Accept = "application/vnd.travis-ci.2+json"),
                     body = list(github_token = gh), encode = "json")
-    travis_token <- jsonlite::fromJSON(httr::content(r, "text"))$access_token
+    travis_token <- jsonlite::fromJSON(httr::content(r, "text", encoding = "UTF-8"))[["access_token"]]
     if (setenv) {
         Sys.setenv("TRAVIS_CI_TOKEN" = travis_token)
     }

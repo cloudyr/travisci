@@ -17,17 +17,13 @@
 #' }
 #' @export
 get_caches <- function(repo, ...) {
-    if (inherits(repo, "travis_build")) {
-        repo <- repo$id
-    }
+    repo <- slug_to_id(repo)
     travisHTTP("GET", path = paste0("/repos/", repo, "/caches"), ...)
 }
 
 #' @export
 #' @rdname get_caches
 delete_caches <- function(repo, ...) {
-    if (inherits(repo, "travis_build")) {
-        repo <- repo$id
-    }
+    repo <- slug_to_id(repo)
     travisHTTP("DELETE", path = paste0("/repos/", repo, "/caches"), ...)
 }

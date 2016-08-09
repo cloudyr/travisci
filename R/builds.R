@@ -25,9 +25,7 @@
 #' @export
 get_builds <- function(repo, build, ...) {
     if (!missing(repo) & !missing(build)) {
-        if (inherits(repo, "travis_repo")) {
-            repo <- repo$id
-        }
+        repo <- slug_to_id(repo)
         if (inherits(build, "travis_build")) {
             build <- build$id
         }
@@ -37,9 +35,7 @@ get_builds <- function(repo, build, ...) {
                        jobs = lapply(out$jobs, `class<-`, "travis_job"),
                        annotations = out$annotations))
     } else if(!missing(repo)) {
-        if (inherits(repo, "travis_repo")) {
-            repo <- repo$id
-        }
+        repo <- slug_to_id(repo)
         out <- travisHTTP("GET", path = paste0("/repos/", repo, "/builds"), ...)
         structure(list(builds = lapply(out$builds, `class<-`, "travis_build"), 
                        commits = lapply(out$commits, `class<-`, "travis_commit")))

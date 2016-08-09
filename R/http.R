@@ -27,7 +27,7 @@ travisHTTP <- function(verb = "GET",
     } else if (verb == "DELETE") {
         r <- httr::DELETE(url, query = query, h, ...)
         s <- httr::http_status(r)
-        if (s$category == "success") {
+        if (s$category %in% c("Success","success")) {
             return(TRUE)
         } else {
             message(s$message)

@@ -2,30 +2,30 @@
 % Please edit documentation in R/environment.R
 \name{get_env_vars}
 \alias{add_env_vars}
-\alias{delete_env_vars}
+\alias{delete_env_var}
 \alias{get_env_vars}
 \alias{update_env_vars}
 \title{Manage environment variables}
 \usage{
 get_env_vars(repo, id, ...)
 
-add_env_vars(repo, var = list(), ...)
+add_env_vars(repo, evar, public = TRUE, ...)
 
-update_env_vars(repo, id, var = list(), ...)
+update_env_vars(repo, id, evar, public, ...)
 
-delete_env_vars(repo, id, ...)
+delete_env_var(repo, id, ...)
 }
 \arguments{
 \item{repo}{A character string specifying a repo slug (i.e., \samp{cloudyr/travisci}) a numeric Travis-CI repository ID, or an object of class \dQuote{travis_repo}. If a slug is used, it will be implicitly converted to a repository ID in some cases where only the latter is accepted.}
 
-\item{id}{An alphanumeric ID for a given environment variable, for example as returned by this function with this argument missing.}
+\item{id}{An alphanumeric ID for a given environment variable or an object of class \dQuote{travis_envvar}, for example as returned by one of these functions.}
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 
-\item{var}{A list of environment variables as key-value pairs.}
+\item{evar}{A list of environment variables as key-value pairs.}
 }
 \value{
-A list.
+A list of objects of class \dQuote{travis_envvar}, except for \code{delete_env_vars}, which returns a logical.
 }
 \description{
 These functions retrieve and modify environment variables for the Travis-CI build environment, as a possible alternative to specifying them in a \samp{.travis.yml} file.
