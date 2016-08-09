@@ -93,7 +93,8 @@ A more complicated approach would restart the PackageB build, then use `get_buil
 ## Installation ##
 
 [![CRAN](http://www.r-pkg.org/badges/version/travisci)](http://cran.r-project.org/package=travisci)
-[![Build Status](https://travis-ci.org/cloudyr/travisci.png?branch=master)](https://travis-ci.org/cloudyr/travisci) [![codecov.io](http://codecov.io/github/cloudyr/travisci/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/travisci?branch=master)
+[![Build Status](https://travis-ci.org/cloudyr/travisci.png?branch=master)](https://travis-ci.org/cloudyr/travisci)
+[![codecov.io](http://codecov.io/github/cloudyr/travisci/coverage.svg?branch=master)](http://codecov.io/github/cloudyr/travisci?branch=master)
 
 This package is not yet on CRAN. To install the latest development version from GitHub:
 
