@@ -24,6 +24,7 @@ get_hooks <- function(...) {
     lapply(out, `class<-`, "travis_hook")
 }
 
+#' @export
 print.travis_hook <- function(x, ...) {
     cat("Hook (", x$id, "): ", x$name, "\n", sep = "")
     cat("Owner: ", x$owner_name, "\n", sep = "")

@@ -28,6 +28,7 @@ get_repo <- function(repo, ...) {
     structure(travisHTTP("GET", path = paste0("/repos/", repo), ...)$repo, class = "travis_repo")
 }
 
+#' @export
 print.travis_repo <- function(x, ...) {
     cat("Repo (", x$id, "): ", x$slug, "\n", sep = "")
     cat("Active: ", as.character(x$active), "\n", sep = "")
@@ -74,6 +75,7 @@ get_branch <- function(repo, branch, ...) {
     }
 }
 
+#' @export
 print.travis_branch <- function(x, ...) {
     cat("Branch (", x$id, ") state: ", x$state, "\n", sep = "")
     cat("Repo:   ", x$repository_id, "\n", sep = "")

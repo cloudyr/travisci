@@ -62,6 +62,7 @@ get_accounts <- function(...) {
     lapply(travisHTTP("GET", path = "/accounts", ...)$accounts, `class<-`, "travis_account")
 }
 
+#' @export
 print.travis_account <- function(x, ...) {
     cat("Account (", x$id, "): ", x$name, "\n", sep = "")
     cat("Type: ", x$type, "\n", sep = "")
@@ -124,6 +125,7 @@ get_users <- function(user, ...) {
     lapply(out, `class<-`, "travis_user")
 }
 
+#' @export
 print.travis_user <- function(x, ...) {
     cat("User (", x$id, "): ", x$name, "\n", sep = "")
     cat("Login: ", x$login, "\n", sep = "")

@@ -60,6 +60,7 @@ get_builds <- function(repo, build, ...) {
     }
 }
 
+#' @export
 print.travis_build <- function(x, ...) {
     cat("Build (", x$id, ") state: ", x$state, "\n", sep = "")
     cat("Type:   ", x$event_type, "\n", sep = "")
@@ -73,6 +74,7 @@ print.travis_build <- function(x, ...) {
     invisible(x)
 }
 
+#' @export
 print.travis_commit <- function(x, ...) {
     cat("Commit (", x$id, "): ", x$message, "\n", sep = "")
     cat("Author: ", x$author_name, " (", x$author_email, ")\n", sep = "")
@@ -81,6 +83,7 @@ print.travis_commit <- function(x, ...) {
     invisible(x)
 }
 
+#' @export
 print.travis_job <- function(x, ...) {
     cat("Job (", x$id, ") state: ", x$state, "\n", sep = "")
     cat("Repo (", x$repository_id, "): ", x$repository_slug, "\n", sep = "")
