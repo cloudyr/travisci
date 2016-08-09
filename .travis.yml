@@ -1,4 +1,6 @@
 language: r
+sudo: false
+cache: packages
 r_github_packages:
 - gaborcsardi/gh
 r_packages:
