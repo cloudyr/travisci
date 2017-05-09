@@ -7,16 +7,11 @@ r_packages:
 - knitr
 - drat
 - covr
-after_failure:
-  email:
-    recipients:
-    - thosjleeper@gmail.com
-    on_success: change
-    on_failure: change
 after_success:
 - Rscript -e 'library("covr");codecov()'
-- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash drat.sh
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
+  drat.sh
 env:
   global:
-  - secure: mUyYN9oNsJ/080poIFAjFGurxzFLkTfhDT7MWRO/Zyx5zsaiXLqKDOAmk+Six4E523Gi/2SPaXVdZGM4Cv1RpuKaW1m1kzFP4URWD/hnkA99x7YN2dBdUaT1dQGOrxyVJX+JFzCuC1xZ2NF8tDHcRMYuRo0lDJw4cPejYOrIcF90HpQBZRQeWGcr8EIQCPIuN+X1+wVYMdwXmnruH6fGvhxuXxN15nfNahQqdgL8s2QR5piG68W3ydUQbaXtNeVMcxERnW2wyFGYvrXeNLiRly4gTdV7xLoSJEN+KVCG9TZ3lPh5Qp5a05IVF4/D9mxJBp0GTHuwP9eAuG+EbEd8WWK0LTtNyt39Jew9lmNAhChM0t1SM+9e82Ovi+6APQHYsMmXTbSJB/CPHntJn6470Ko7DmP/j/v0+IdDuGXyfPQRIxNYyu3RF7F2Fc9n0W+g+A/lBdMr7IQEchDljI6XL0dqTZEc2PDviRC9GTTL8F4vhwbV1nIqzmqXafa+Cd+mca9T0iHtgIAx0tBVBRt9lM8kmLOaYR8L3v/dmgFYyHQSYKMsvasxmAwBHDpUy6BQ+W+dwjM9oaJoILeAtXx9uFzxWFd6a7BgexNZYmxy9Xp2UpgcAxP5kW7ueSOHm/XGrSr8yL/A/taMlUIKO+T12F0jEWxUSIGmnzc+qM0G7Io=
   - secure: MFlTIu9JRwiYYc03wmNu2YiOoS7iDZRpxGXiJEIE/m1WBfP2DCrps+DJfEXefcqsQ67NEUPbbpI5sJi7nJQlCsOurlLy1zoLo5KCwt9GbPqvYAEa1ffn586Dw7vRPI6/DWnwfktabypX4lJiye+2gmv9/mSrJe+4319qsgWgkeoDhWFdhB5yUeTsGp/hLhpkr6l3U4lUJJ4wl+VMKVPivgJsHS5JvjpupplNzSnNlThUDGIb+eGIWCP/tI4C//AXFEjMjeCOnkuMp/2lDSCHQccrSlBY+H9j8CkEigqZppfZgnBGAvZX1a48TWwPEpYZDBVOoKhiCX8mFwos/zcEmJcICDWLDAbwTJtQfrnD37JkIAcniFDGFRC9EVDljzrQjz7ySf4zJBM0asBcnwxh3EmGzQln0csPYXGHPfpCbno3X4ZPjTXR7mQ1n+r4QDf4qwN8mp21d0oRv6CLoJN4D/vf7wOy+oZf+KLJGSjcZr0A+xSiu87DSAoALN0u+Hyi6YM/oRBz6jBnyzwVe+MlcovkFBmUc07VNpNTUYnl57mjeZaYl/izKdQuxJMU6ZunBMuPRaYX+OJAGU54UIz/qKJ1pqQxsGPVxYj84lgj+EhILaS9SuygsUW1jyilzVeJApMdTRBrccLOXpsrBaz2BfNkQHLPJHsrCBCO3jzf46E=
+  - secure: Wvb/Vy3l2az6E9f2RHZ1VkeFryQm1I5z38+m1yDShLJ04DhTgNnd0DgY0c0g4HA8B7ThH1Z/hgCeqYQm3JyZP1Tr/R/pvWv2roHL2LDNoIyDTEzikN6GL80Jb9rMvEVHDladiAX26UUHe0cPA2mB8VIoDlVO6FxUfBAmgq8A8xS9tOAZIAZf4YABHccZPkiBjWaPiCI9kwNd/imnYJ2syA9LOIF1yHYKfkerB6Onab1362RE5mAwuoEYg3m//IfwkUhFt1Zxu3dLeLpRssADPu4QkbhCdQJeUHeMAdc9+pOszO33AGG4EuY+pMjbZDdbeUb4v8rIbRISKZJPx7SgdBHGlkiKvaBGG0eB8bdSuy+OV2aUOkIDlXSV6dtpZfHd+urEMrU7fl3PYD3VyQRJ6qlsL0bkCX5uBygWZQ3wV579xWtQz57x/mqBrSBGwyPsXIA2U0NtQRT8IdE+Izbwzi4Asmn3XqX8ibtIXOgOSBHUciLS4cUTSs/H7Ch11f06J7VPwBbb49JvhMnew8J5poL1h4XhN8JcMU3HFb31TmOtmPFbcwY8kTZubl76iCi/rwO4YpDE44CRIbW3aNR/SAnYrQJ6pQ0GszLfzwRXoeC/+ghuUpcuz2Uv9dse3Ktzb/EzK+xED3vQAIgtADqUXyJg87t/uwMLYjT4NIwa/5s=
