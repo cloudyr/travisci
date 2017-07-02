@@ -46,4 +46,3 @@ set_repo_settings(repo = "cloudyr/travisci", list("builds_only_with_travis_yml" 
 
 \code{\link{get_repo}}, \code{\link{get_env_vars}}
 }
-

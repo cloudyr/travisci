@@ -94,7 +94,7 @@ get_permissions <- function(...) {
 #' @title Travis CI Users
 #' @description Retrieve and sync Travis CI users
 #' @details \code{get_users} retrieves information about GitHub users attached to a Travis account. \code{sync_users} syncs Travis's local cache of users against GitHub.
-#' @param user Optionally, an integer specifying a user ID. If missing, all users are returned.
+#' @param user Optionally, an integer specifying a user ID, or a character string specifying a user login, or a \dQuote{travis_user} object. If missing, all users are returned.
 #' @param ... Additional arguments passed to \code{\link{travisHTTP}}.
 #' @return A list.
 #' @examples
@@ -117,6 +117,10 @@ get_users <- function(user, ...) {
     if (!missing(user)) {
         if (inherits(user, "travis_user")) {
             user <- user$id
+        } else if (inherits(user, "character")) {
+            users <- get_users(...)
+            logins <- lapply(users, `[[`, "login")
+            user <- users[[which(logins == user)]][["id"]]
         }
         out <- travisHTTP("GET", path = paste0("/users/", user), ...)
     } else {

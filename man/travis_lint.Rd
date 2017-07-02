@@ -32,4 +32,3 @@ travis_lint("./.travis.yml")
 \seealso{
 \code{\link{get_permissions}} to check GitHub permissions
 }
-

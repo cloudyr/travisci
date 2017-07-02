@@ -44,4 +44,3 @@ restart_build(g[[1]]$id)
 \seealso{
 \code{\link{get_builds}}
 }
-

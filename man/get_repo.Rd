@@ -40,4 +40,3 @@ get_builds(repo = "cloudyr/travisci")
 
 \code{\link{get_builds}}, \code{\link{get_branch}}
 }
-

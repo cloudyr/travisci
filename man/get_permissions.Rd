@@ -30,4 +30,3 @@ get_permissions()
 \seealso{
 \code{\link{get_accounts}}, \code{\link{get_users}}, \code{\link{get_requests}} (to troubleshoot specific code pushes)
 }
-

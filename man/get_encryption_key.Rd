@@ -38,4 +38,3 @@ set_encryption_key("cloudyr/travisci")
 \seealso{
 \code{\link{get_env_vars}}
 }
-

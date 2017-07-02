@@ -37,4 +37,3 @@ get_requests(12345)
 \seealso{
 \code{\link{get_permissions}} to check GitHub permissions
 }
-

@@ -54,8 +54,8 @@ travisHTTP <- function(verb = "GET",
     } else {
         stop("Unrecognized HTTP verb")
     }
-    httr::warn_for_status(r)
-    out <- httr::content(r, "parsed")
+    httr::stop_for_status(r)
+    out <- httr::content(r, "parsed", encoding = "UTF-8")
     if (!is.null(names(out)) && "error" %in% names(out)) {
         warning(out$error$message)
     }

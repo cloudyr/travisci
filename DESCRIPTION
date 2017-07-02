@@ -1,13 +1,12 @@
 Package: travisci
 Type: Package
 Title: Travis-CI API Client Package
-Version: 0.1.9
-Date: 2016-08-09
+Version: 0.1.10
+Date: 2017-07-02
 Authors@R: c(person("Thomas J.", "Leeper", role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"))
 Maintainer: Thomas J. Leeper <thosjleeper@gmail.com>
-Description: A simple client for the Travis-CI <https://travis-ci.org/> REST
-    API.
+Description: A simple client for the Travis-CI <https://travis-ci.org/> 'API'.
 License: GPL (>= 2)
 URL: https://github.com/cloudyr/travisci
 BugReports: https://github.com/cloudyr/travisci/issues
@@ -17,4 +16,4 @@ Imports:
 Enhances: devtools
 Suggests:
     testthat
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

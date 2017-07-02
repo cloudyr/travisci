@@ -10,7 +10,7 @@ get_users(user, ...)
 sync_users(...)
 }
 \arguments{
-\item{user}{Optionally, an integer specifying a user ID. If missing, all users are returned.}
+\item{user}{Optionally, an integer specifying a user ID, or a character string specifying a user login, or a \dQuote{travis_user} object. If missing, all users are returned.}
 
 \item{...}{Additional arguments passed to \code{\link{travisHTTP}}.}
 }
@@ -41,4 +41,3 @@ get_user("userid")
 \seealso{
 \code{\link{get_accounts}}, \code{\link{get_permissions}}
 }
-

@@ -50,4 +50,3 @@ auth_travis()
 \seealso{
 \code{\link{travisHTTP}}
 }
-

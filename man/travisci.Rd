@@ -31,4 +31,3 @@ get_accounts()
 \seealso{
 \code{\link{auth_travis}}, \code{\link{get_accounts}}, \code{\link{get_repo}}
 }
-

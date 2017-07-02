@@ -15,6 +15,6 @@
 #' @seealso \code{\link{get_permissions}} to check GitHub permissions
 #' @export
 travis_lint <- function(file, ...) {
-    travisHTTP("GET", path = paste0("/requests"), 
-               body = list(content = httr::upload_file(file)), ...)
+    travisHTTP("GET", path = paste0("/lint"), 
+               body = httr::upload_file(file), encode = "raw", ...)
 }

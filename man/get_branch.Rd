@@ -39,4 +39,3 @@ get_branch(repo = "cloudyr/travisci", "master")
 
 \code{\link{get_repo}}, \code{\link{get_builds}}
 }
-

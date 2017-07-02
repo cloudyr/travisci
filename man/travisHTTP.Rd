@@ -32,4 +32,3 @@ This is the workhorse function for executing API requests for Travis-CI.
 \details{
 This is mostly an internal function for executing API requests. In almost all cases, users do not need to access this directly.
 }
-

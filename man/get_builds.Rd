@@ -43,4 +43,3 @@ get_builds(build = g[[1]]$id)
 
 \code{\link{cancel_build}}, \code{\link{get_repo}}, \code{\link{get_branch}}
 }
-

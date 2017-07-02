@@ -36,4 +36,3 @@ get_logs(job = 12345)
 
 \code{\link{get_job}}, \code{\link{get_annotations}}
 }
-

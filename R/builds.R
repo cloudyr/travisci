@@ -34,12 +34,12 @@ get_builds <- function(repo, build, ...) {
                        commit = `class<-`(out$commit, "travis_commit"),
                        jobs = lapply(out$jobs, `class<-`, "travis_job"),
                        annotations = out$annotations))
-    } else if(!missing(repo)) {
+    } else if (!missing(repo)) {
         repo <- slug_to_id(repo)
         out <- travisHTTP("GET", path = paste0("/repos/", repo, "/builds"), ...)
         structure(list(builds = lapply(out$builds, `class<-`, "travis_build"), 
                        commits = lapply(out$commits, `class<-`, "travis_commit")))
-    } else if(!missing(build)) {
+    } else if (!missing(build)) {
         if (inherits(build, "travis_build")) {
             build <- build$id
         }
